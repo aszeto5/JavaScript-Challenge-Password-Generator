@@ -1,4 +1,5 @@
 // Assignment code here
+var generateBtn = document.querySelector("#generate");
 
 //Global character options
   var upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -11,44 +12,53 @@
     var password = "";
 
 //Password Length
-    var confirmLength = window.prompt("How many characters do you want to include in your password?");
-
-    while(confirmLength <= 8 || confrimlength >= 128) {
-      window.alert("Password length must be between 8-128 characters.");
+    var confirmLength = prompt("How many characters do you want to include in your password?");
+    while(confirmLength <= 8 || confirmLength >= 128) {
+      alert("Password length must be between 8-128 characters.");
+      confirmLength = (prompt("How many characters do you want your password to include?"));
     };
 
+//Variables for selected character types
+    var upperCase = confirm("Click 'OK' to include uppercased characters in your password.")
+    var lowerCase = confirm("Click 'OK' to include lowercased characters in your password.")
+    var specialCase = confirm("Click 'OK' to include special characters in your password.")
+    var numberCase = confirm("Click 'OK' to include numbers in your password.")
+
 //Character Type
-
-    var confirmUpper = window.confirm("Click to inlcude upper cased letters in your password.");
-    var confirmLower = window.confirm("Click to include lower cased lettters in your password.");
-    var special = window.confirm("Click to include special characters in your password.");
-    var num = window.confirm("Click to confirm numbers in your password.");
-
-    if (confirmUpper === false && confirmLower === false && special === false && num === false) {
+    if (upperCase === false && lowerCase === false && specialCase === false && numberCase === false) {
       window.alert("Please select at least ONE character type");
-    }
+    
+    upperCase = window.confirm("Click to inlcude upper cased letters in your password.");
+    lowerCase = window.confirm("Click to include lower cased lettters in your password.");
+    specialCase = window.confirm("Click to include special characters in your password.");
+    numberCase = window.confirm("Click to confirm numbers in your password.");
+    };
 
   };
   
-  
-  //generating random letters
+  var chars = [];
+
+  var confirmLength = window.prompt("How many characters do you want to include in your password?");
+  //randomizing letters
   for (var i = 0; i <= confirmLength; i++) {
     var randomNumber = Math.floor(Math.random() * chars.length);
-    password += chars.substring(randomNumber, randomNumber +1);
+    randomLetter = chars[randomNumber];
+    // password += chars.substring(randomNumber, randomNumber +1);
+
+    password = password + randomLetter;
   }
 
-document.getElementById("password").value = password;
-
+// document.getElementById("password").value = password;
 
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var newpassword = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  passwordText.value = newpassword;
 
 };
 
